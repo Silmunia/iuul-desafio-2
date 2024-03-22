@@ -1,0 +1,105 @@
+@import url("../../common-styles/css-reset.css");
+@import url("../../common-styles/custom-values.css");
+@import url("../../common-styles/website-style.css");
+
+main {
+    color: var(--dark-color);
+
+    max-width: 72%;
+
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+}
+
+.career-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+.career-item {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.career-item img {
+    border: 6px solid var(--lightest-blue);
+    border-radius: 15px;
+    padding: 8px;
+    width: clamp(120px, 9.1vw, 175px);
+    height: clamp(120px, 9.1vw, 175px);
+}
+
+.career-item > div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.career-info {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.career-info > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+main h1 {
+    font-family: "Barlow Condensed";
+    font-size: 2.6rem;
+    font-weight: bold;
+}
+
+main h2 {
+    font-family: "Barlow Condensed";
+    font-size: 2rem;
+}
+
+main h3 {
+    font-family: "Barlow Condensed";
+    font-size: 1.8rem;
+    font-style: italic;
+}
+
+main p {
+    font-family: "Montserrat";
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+}
+
+@media only screen and (max-width: 1166px) {
+    .career-item {
+        align-items: center;
+    }
+
+    .career-item > div {
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 680px) {
+    main h1 {
+        font-size: 2rem;
+    }
+
+    .career-info {
+        width: 100%;
+    }
+
+    .career-info > div {
+        flex-direction: column;
+        align-items: center;
+    }
+}

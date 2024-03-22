@@ -1,0 +1,129 @@
+@import url("../../common-styles/css-reset.css");
+@import url("../../common-styles/custom-values.css");
+@import url("../../common-styles/website-style.css");
+
+main {
+    color: var(--dark-color);
+
+    max-width: 72%;
+
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+
+    flex-wrap: wrap;
+    gap: 44px;
+}
+
+.contact-container {
+    width: clamp(320px, 25.2vw, 484px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 80px;
+}
+
+.contact-item a {
+    color: var(--dark-blue);
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: clamp(6px, 1.25vw, 14px);
+}
+
+.contact-item img {
+    width: 100px;
+    height: 100px;
+}
+
+.contact-item div {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: min(0.75vw, 20px);
+}
+
+.contact-item h1 {
+    font-family: "Barlow Condensed";
+    font-size: 2.6rem;
+    font-weight: bold;
+}
+
+.form-container {
+    width: clamp(320px, 25.2vw, 484px);
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+.form-container label {
+    font-family: "Montserrat";
+    font-size: 1.8rem;
+}
+
+.form-container div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.form-container h1 {
+    font-family: "Barlow Condensed";
+    font-size: 2.6rem;
+    font-weight: bold;
+}
+
+.form-container input {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    height: 34px;
+
+    font-family: "Montserrat";
+    font-size: 1.6rem;
+
+    border-color: var(--dark-color);
+}
+
+.form-container textarea {
+    color: var(--dark-color);
+    background-color: var(--light-color);
+    height: 150px;
+    resize: none;
+
+    font-family: "Montserrat";
+    font-size: 1.6rem;
+
+    border-color: var(--dark-color);
+}
+
+.form-container button {
+    width: 216px;
+    height: 34px;
+
+    font-family: "Montserrat";
+    font-size: 1.8rem;
+
+    background-color: var(--lightest-blue);
+    color: var(--dark-color);
+    border-color: var(--dark-color);
+
+    margin: 12px auto 0px;
+}
+
+@media only screen and (max-width: 949px) {
+
+    .contact-container {
+        gap: 20px;
+    }
+
+    .contact-item img {
+        width: 36px;
+        height: 36px;
+    }
+}

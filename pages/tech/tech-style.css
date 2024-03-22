@@ -1,0 +1,140 @@
+@import url("../../common-styles/css-reset.css");
+@import url("../../common-styles/custom-values.css");
+@import url("../../common-styles/website-style.css");
+
+main {
+    color: var(--dark-color);
+    
+    max-width: 72%;
+}
+
+.tech-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+}
+
+.tech-item {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 16px;
+}
+
+.tech-item > div:first-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
+
+.tech-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 14px;
+    height: 50%;
+    width: 50%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.tech-attributes {
+    width: 100%;
+    display: flex;
+    align-self: center;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.tech-attributes h2 {
+    text-align: center;
+}
+
+.tech-attributes > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.tech-projects {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.tech-attributes ul, .tech-projects ul {
+    list-style-type: square;
+}
+
+.tech-projects li {
+    margin-bottom: 6px;
+}
+
+.tech-item h1, .tech-item h2, .tech-item h3 {
+    font-family: "Barlow Condensed";
+    font-weight: bold;
+}
+
+.tech-item h1 {
+    font-size: 2.6rem;
+}
+
+.tech-item h2 {
+    font-size: 2rem;
+}
+
+.tech-item a, .tech-item p {
+    font-family: "Montserrat";
+    font-size: 1.6rem;
+}
+
+.tech-item a {
+    font-style: italic;
+    color: var(--dark-blue);
+}
+
+.tech-item p {
+    line-height: 22px;;
+}
+
+.tech-item li {
+    font-family: "Montserrat";
+    font-size: 1.6rem;
+    margin-bottom: 6px;
+}
+
+.tech-item img {
+    border: 6px solid var(--lightest-blue);
+    border-radius: 16px;
+    padding: 10px;
+
+    width: clamp(120px, 11.9vw, 230px);
+    height: clamp(120px, 11.9vw, 230px);
+}
+
+@media only screen and (max-width: 900px) {
+    .tech-item {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tech-description {
+        width: 80%;
+    }
+
+    .tech-attributes {
+        flex-wrap: wrap;
+    }
+
+    .tech-projects h2 {
+        text-align: center;
+    }
+
+    .tech-projects ul {
+        display: flex;
+        gap: 60px;
+    }
+}
