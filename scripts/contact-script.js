@@ -13,5 +13,16 @@ contactForm.addEventListener('submit', () => {
         "message": formMessage.value
     }
 
-    localStorage.setItem("previousFormSubmission", JSON.stringify(submissionObject));
+    let formHistoryJSON = localStorage.getItem("formSubmissions");
+    let formHistoryArray = JSON.parse(formHistoryJSON);
+
+    if (formHistoryArray == null) {
+        formHistoryArray = [];
+    }
+
+    formHistoryArray.unshift(submissionObject);
+
+    let newFormHistoryJSON = JSON.stringify(formHistoryArray);
+
+    localStorage.setItem("formSubmissions", newFormHistoryJSON);
 });
