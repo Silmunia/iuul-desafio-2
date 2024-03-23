@@ -1,4 +1,6 @@
 
+const FORM_HISTORY_KEY = "formHistory";
+
 function makeNewFormSubmission() {
     let formNameEntry = document.getElementById("name");
     let formEmailEntry = document.getElementById("email");
@@ -8,13 +10,13 @@ function makeNewFormSubmission() {
         "name": formNameEntry.value,
         "email": formEmailEntry.value,
         "message": formMessage.value
-    }
+    };
 
     return submissionObject;
 }
 
 function getFormHistory() {
-    let formHistoryJSON = localStorage.getItem("formSubmissions");
+    let formHistoryJSON = localStorage.getItem(FORM_HISTORY_KEY);
     let formHistoryArray = JSON.parse(formHistoryJSON);
 
     if (formHistoryArray == null) {
@@ -29,7 +31,7 @@ function saveNewFormSubmission(submissionObject, formHistoryArray) {
 
     let newFormHistoryJSON = JSON.stringify(formHistoryArray);
 
-    localStorage.setItem("formSubmissions", newFormHistoryJSON);
+    localStorage.setItem(FORM_HISTORY_KEY, newFormHistoryJSON);
 }
 
 let contactForm = document.querySelector("form");
