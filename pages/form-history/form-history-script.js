@@ -112,7 +112,7 @@ const historyContainer = document.querySelector(".form-history-container");
 
 const formHistoryJSON = localStorage.getItem(FORM_HISTORY_KEY);
 
-if (formHistoryJSON == null) {
+if (formHistoryJSON == null || formHistoryJSON == "[]") {
 
     const messageElement = document.createElement("h1");
     messageElement.textContent = "No form history found.";
