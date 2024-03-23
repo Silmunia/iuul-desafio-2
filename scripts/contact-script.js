@@ -44,3 +44,12 @@ contactForm.addEventListener('submit', () => {
 
     saveNewFormSubmission(newSubmission, formHistory);
 });
+
+function deleteFormHistory() {
+    const userChoice = confirm("Deseja apagar o histórico de mensagens do formulário? Esta operação é irreversível.");
+
+    if (userChoice) {
+        localStorage.removeItem(FORM_HISTORY_KEY);
+        alert("O histórico de mensagens do formulário foi apagado.");
+    }
+}
