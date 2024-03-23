@@ -1,8 +1,5 @@
 
-let contactForm = document.querySelector("form");
-
-contactForm.addEventListener('submit', () => {
-
+function makeNewFormSubmission() {
     let formNameEntry = document.getElementById("name");
     let formEmailEntry = document.getElementById("email");
     let formMessage = document.querySelector("textarea");
@@ -13,6 +10,10 @@ contactForm.addEventListener('submit', () => {
         "message": formMessage.value
     }
 
+    return submissionObject;
+}
+
+function getFormHistory() {
     let formHistoryJSON = localStorage.getItem("formSubmissions");
     let formHistoryArray = JSON.parse(formHistoryJSON);
 
@@ -20,9 +21,24 @@ contactForm.addEventListener('submit', () => {
         formHistoryArray = [];
     }
 
+    return formHistoryArray;
+}
+
+function saveNewFormSubmission(submissionObject, formHistoryArray) {
     formHistoryArray.unshift(submissionObject);
 
     let newFormHistoryJSON = JSON.stringify(formHistoryArray);
 
     localStorage.setItem("formSubmissions", newFormHistoryJSON);
+}
+
+let contactForm = document.querySelector("form");
+
+contactForm.addEventListener('submit', () => {
+
+    let newSubmission = makeNewFormSubmission();
+
+    let formHistory = getFormHistory();
+
+    saveNewFormSubmission(newSubmission, formHistory);
 });
