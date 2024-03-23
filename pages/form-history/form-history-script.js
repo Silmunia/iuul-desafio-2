@@ -23,9 +23,13 @@ if (formHistoryJSON == null) {
         const entryEmailElement = document.createElement("h2");
         entryEmailElement.textContent = formHistoryArray[i]["email"];
 
+        const entryDateElement = document.createElement("h3");
+        entryDateElement.textContent = formHistoryArray[i]["date"];
+
         const entryIdentificationContainer = document.createElement("div");
         entryIdentificationContainer.appendChild(entryNameElement);
         entryIdentificationContainer.appendChild(entryEmailElement);
+        entryIdentificationContainer.appendChild(entryDateElement);
 
         const entryMessageElement = document.createElement("p");
         entryMessageElement.textContent = formHistoryArray[i]["message"];
