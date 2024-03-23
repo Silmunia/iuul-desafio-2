@@ -68,6 +68,13 @@ main {
     word-wrap: break-word;
     font-family: "Montserrat";
     font-size: 1.6rem;
+}
+
+.form-entry h3 {
+    max-width: 100%;
+    word-wrap: break-word;
+    font-family: "Montserrat";
+    font-size: 1.4rem;
     font-style: italic;
 }
 

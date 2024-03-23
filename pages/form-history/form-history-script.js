@@ -7,7 +7,7 @@ const formHistoryJSON = localStorage.getItem(FORM_HISTORY_KEY);
 
 if (formHistoryJSON == null) {
 
-    let messageElement = document.createElement("h1");
+    const messageElement = document.createElement("h1");
     messageElement.textContent = "No form history found.";
 
     historyContainer.appendChild(messageElement);
@@ -17,20 +17,24 @@ if (formHistoryJSON == null) {
 
     for (let i = formHistoryArray.length - 1; i >= 0; i--) {
 
-        let entryNameElement = document.createElement("h1");
+        const entryNameElement = document.createElement("h1");
         entryNameElement.textContent = formHistoryArray[i]["name"];
 
-        let entryEmailElement = document.createElement("h2");
+        const entryEmailElement = document.createElement("h2");
         entryEmailElement.textContent = formHistoryArray[i]["email"];
 
-        let entryIdentificationContainer = document.createElement("div");
+        const entryDateElement = document.createElement("h3");
+        entryDateElement.textContent = makeDateString(formHistoryArray[i]["date"]);
+
+        const entryIdentificationContainer = document.createElement("div");
         entryIdentificationContainer.appendChild(entryNameElement);
         entryIdentificationContainer.appendChild(entryEmailElement);
+        entryIdentificationContainer.appendChild(entryDateElement);
 
-        let entryMessageElement = document.createElement("p");
+        const entryMessageElement = document.createElement("p");
         entryMessageElement.textContent = formHistoryArray[i]["message"];
 
-        let formEntryContainer = document.createElement("div");
+        const formEntryContainer = document.createElement("div");
         formEntryContainer.appendChild(entryIdentificationContainer);
         formEntryContainer.appendChild(entryMessageElement);
 
@@ -38,4 +42,28 @@ if (formHistoryJSON == null) {
 
         historyContainer.appendChild(formEntryContainer);
     }
+}
+
+function makeDateString(entryEpochString) {
+    const entryDate = new Date(entryEpochString);
+
+    const day = entryDate.getUTCDate();
+    const month = getMonthNameFromDate(entryDate);
+    const year = entryDate.getUTCFullYear();
+
+    const hours = entryDate.getUTCHours();
+    const minutes = entryDate.getUTCMinutes();
+    const seconds = entryDate.getUTCSeconds();
+
+    return `${day} de ${month} de ${year}, ${hours}:${minutes}:${seconds} UTC`
+}
+
+function getMonthNameFromDate(inputDate) {
+    const monthName = inputDate.toLocaleString('pt', { month: 'long'});
+
+    const monthFirstLetter = monthName.charAt(0).toUpperCase();
+
+    const monthCapitalized = monthFirstLetter + monthName.slice(1);
+
+    return monthCapitalized;
 }

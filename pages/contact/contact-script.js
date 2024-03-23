@@ -2,21 +2,24 @@
 const FORM_HISTORY_KEY = "formHistory";
 
 function makeNewFormSubmission() {
-    let formNameEntry = document.getElementById("name");
-    let formEmailEntry = document.getElementById("email");
-    let formMessage = document.querySelector("textarea");
+    const formNameEntry = document.getElementById("name");
+    const formEmailEntry = document.getElementById("email");
+    const formMessage = document.querySelector("textarea");
 
-    let submissionObject = {
+    const formEntryDate = Date.now();
+
+    const submissionObject = {
         "name": formNameEntry.value,
         "email": formEmailEntry.value,
-        "message": formMessage.value
+        "message": formMessage.value,
+        "date": formEntryDate
     };
 
     return submissionObject;
 }
 
 function getFormHistory() {
-    let formHistoryJSON = localStorage.getItem(FORM_HISTORY_KEY);
+    const formHistoryJSON = localStorage.getItem(FORM_HISTORY_KEY);
     let formHistoryArray = JSON.parse(formHistoryJSON);
 
     if (formHistoryArray == null) {
@@ -29,21 +32,10 @@ function getFormHistory() {
 function saveNewFormSubmission(submissionObject, formHistoryArray) {
     formHistoryArray.unshift(submissionObject);
 
-    let newFormHistoryJSON = JSON.stringify(formHistoryArray);
+    const newFormHistoryJSON = JSON.stringify(formHistoryArray);
 
     localStorage.setItem(FORM_HISTORY_KEY, newFormHistoryJSON);
 }
-
-let contactForm = document.querySelector("form");
-
-contactForm.addEventListener('submit', () => {
-
-    let newSubmission = makeNewFormSubmission();
-
-    let formHistory = getFormHistory();
-
-    saveNewFormSubmission(newSubmission, formHistory);
-});
 
 function deleteFormHistory(event) {
     event.preventDefault();
@@ -55,3 +47,14 @@ function deleteFormHistory(event) {
         alert("O histórico de mensagens do formulário foi apagado.");
     }
 }
+
+const contactForm = document.querySelector("form");
+
+contactForm.addEventListener('submit', () => {
+
+    const newSubmission = makeNewFormSubmission();
+
+    const formHistory = getFormHistory();
+
+    saveNewFormSubmission(newSubmission, formHistory);
+});
