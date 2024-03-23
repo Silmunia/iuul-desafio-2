@@ -6,13 +6,28 @@ function makeNewFormSubmission() {
     let formEmailEntry = document.getElementById("email");
     let formMessage = document.querySelector("textarea");
 
+    let formEntryDate = getSubmissionDate();
+
     let submissionObject = {
         "name": formNameEntry.value,
         "email": formEmailEntry.value,
-        "message": formMessage.value
+        "message": formMessage.value,
+        "date": formEntryDate
     };
 
     return submissionObject;
+}
+
+function getSubmissionDate() {
+    const currentDate = new Date();
+
+    const day = currentDate.getDay();
+    const month = currentDate.getMonth() + 1;
+    const year = currentDate.getFullYear();
+
+    const formattedDate = `${day}-${month}-${year}`;
+
+    return formattedDate;
 }
 
 function getFormHistory() {
@@ -34,17 +49,6 @@ function saveNewFormSubmission(submissionObject, formHistoryArray) {
     localStorage.setItem(FORM_HISTORY_KEY, newFormHistoryJSON);
 }
 
-let contactForm = document.querySelector("form");
-
-contactForm.addEventListener('submit', () => {
-
-    let newSubmission = makeNewFormSubmission();
-
-    let formHistory = getFormHistory();
-
-    saveNewFormSubmission(newSubmission, formHistory);
-});
-
 function deleteFormHistory(event) {
     event.preventDefault();
 
@@ -55,3 +59,14 @@ function deleteFormHistory(event) {
         alert("O histórico de mensagens do formulário foi apagado.");
     }
 }
+
+let contactForm = document.querySelector("form");
+
+contactForm.addEventListener('submit', () => {
+
+    let newSubmission = makeNewFormSubmission();
+
+    let formHistory = getFormHistory();
+
+    saveNewFormSubmission(newSubmission, formHistory);
+});
