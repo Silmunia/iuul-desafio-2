@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="contact-style.css">
+        <script src="contact-script.js" defer></script>
         <title>Contato</title>
     </head>
 
@@ -42,7 +43,7 @@
                 </div>
             </div>
 
-            <form class="form-container" action="" method="post">
+            <form class="form-container" action="" method="">
 
                 <h1>Formulário</h1>
                 <div>
@@ -59,6 +60,11 @@
                 </div>
 
                 <button type="submit">Enviar</button>
+
+                <div class="form-control">
+                    <a href="../form-history/form-history.html">Ver histórico de envios</a>
+                    <a href="" onclick="deleteFormHistory(event)">Apagar histórico de envios</a>
+                </div>
             </form>
         </main>
 
