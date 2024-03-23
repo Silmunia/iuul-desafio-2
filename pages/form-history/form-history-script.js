@@ -1,10 +1,12 @@
 
 class EntryContainerFactory {
+    #historyArray;
+
     constructor(historyArray) {
-        this.historyArray = historyArray;
+        this.#historyArray = historyArray;
     }
 
-    getMonthNameFromDate(inputDate) {
+    #getMonthNameFromDate(inputDate) {
         const monthName = inputDate.toLocaleString('pt', { month: 'long'});
     
         const monthFirstLetter = monthName.charAt(0).toUpperCase();
@@ -14,11 +16,11 @@ class EntryContainerFactory {
         return monthCapitalized;
     }
 
-    makeDateString(entryEpochString) {
+    #makeDateString(entryEpochString) {
         const entryDate = new Date(entryEpochString);
     
         const day = entryDate.getUTCDate();
-        const month = this.getMonthNameFromDate(entryDate);
+        const month = this.#getMonthNameFromDate(entryDate);
         const year = entryDate.getUTCFullYear();
     
         const hours = entryDate.getUTCHours();
@@ -28,36 +30,48 @@ class EntryContainerFactory {
         return `${day} de ${month} de ${year}, ${hours}:${minutes}:${seconds} UTC`
     }
 
-    makeElement(entryIndex) {
+    #makeEntryIdentificationElement(entryIndex) {
         const entryNameElement = document.createElement("h1");
-        entryNameElement.textContent = this.historyArray[entryIndex]["name"];
+        entryNameElement.textContent = this.#historyArray[entryIndex]["name"];
 
         const entryEmailElement = document.createElement("h2");
-        entryEmailElement.textContent = this.historyArray[entryIndex]["email"];
+        entryEmailElement.textContent = this.#historyArray[entryIndex]["email"];
 
         const entryIdentificationContainer = document.createElement("div");
         entryIdentificationContainer.appendChild(entryNameElement);
         entryIdentificationContainer.appendChild(entryEmailElement);
 
+        return entryIdentificationContainer;
+    }
+
+    #makeEntryHeaderElement(entryIndex) {
+        const entryIdentificationContainer = this.#makeEntryIdentificationElement(entryIndex)
+
         const entryDateElement = document.createElement("h3");
-        entryDateElement.textContent = this.makeDateString(this.historyArray[entryIndex]["date"]);
+        entryDateElement.textContent = this.#makeDateString(this.#historyArray[entryIndex]["date"]);
 
         const entryHeaderContainer = document.createElement("div");
         entryHeaderContainer.appendChild(entryIdentificationContainer);
         entryHeaderContainer.appendChild(entryDateElement);
 
-        const entryMessageElement = document.createElement("p");
-        entryMessageElement.textContent = this.historyArray[entryIndex]["message"];
+        return entryHeaderContainer;
+    }
 
+    #makeEntryDeletionElement(entryIndex) {
         const formDeletionIcon = document.createElement("img");
         formDeletionIcon.src = "../../icons/Trash-Icon.svg";
+
         const formEntryDeletionTrigger = document.createElement("a");
+        formEntryDeletionTrigger.appendChild(formDeletionIcon);
+
         formEntryDeletionTrigger.href = "";
+        formEntryDeletionTrigger.classList.add("entry-delete-trigger");
+
         formEntryDeletionTrigger.addEventListener('click', (event) => {
             const userChoice = confirm("Deseja apagar esta mensagem do formulário? Esta operação é irreversível.");
 
             if (userChoice) {
-                const newFormHistoryArray = this.historyArray.toSpliced(entryIndex, 1);
+                const newFormHistoryArray = this.#historyArray.toSpliced(entryIndex, 1);
 
                 const newFormHistoryJSON = JSON.stringify(newFormHistoryArray);
 
@@ -68,9 +82,18 @@ class EntryContainerFactory {
                 event.preventDefault();
             }
         });
-        formEntryDeletionTrigger.appendChild(formDeletionIcon);
 
-        formEntryDeletionTrigger.classList.add("entry-delete-trigger");
+        return formEntryDeletionTrigger;
+    }
+
+    makeElement(entryIndex) {
+        
+        const entryHeaderContainer = this.#makeEntryHeaderElement(entryIndex);
+
+        const entryMessageElement = document.createElement("p");
+        entryMessageElement.textContent = this.#historyArray[entryIndex]["message"];
+
+        const formEntryDeletionTrigger = this.#makeEntryDeletionElement(entryIndex);
 
         const formEntryContainer = document.createElement("div");
         formEntryContainer.appendChild(entryHeaderContainer);
