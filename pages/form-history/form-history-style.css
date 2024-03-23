@@ -37,6 +37,7 @@ main {
 }
 
 .form-entry {
+    position: relative;
     min-width: 170px;
     display: flex;
     flex-direction: column;
@@ -49,8 +50,9 @@ main {
 
 .form-entry div {
     display: flex;
+    max-width: 90%;
     justify-content: space-between;
-    align-items: center;
+    align-items: end;
     flex-wrap: wrap;
     gap: 8px;
 }
@@ -84,4 +86,10 @@ main {
     font-family: "Montserrat";
     font-size: 1.4rem;
     line-height: 18px;
+}
+
+.entry-delete-trigger {
+    position: absolute;
+    top: 22px;
+    right: 16px;
 }
