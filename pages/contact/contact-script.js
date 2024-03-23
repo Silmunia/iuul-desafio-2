@@ -6,7 +6,7 @@ function makeNewFormSubmission() {
     const formEmailEntry = document.getElementById("email");
     const formMessage = document.querySelector("textarea");
 
-    const formEntryDate = getSubmissionDate();
+    const formEntryDate = new Date();
 
     const submissionObject = {
         "name": formNameEntry.value,
@@ -16,18 +16,6 @@ function makeNewFormSubmission() {
     };
 
     return submissionObject;
-}
-
-function getSubmissionDate() {
-    const currentDate = new Date();
-
-    const day = currentDate.getDay();
-    const month = currentDate.getMonth() + 1;
-    const year = currentDate.getFullYear();
-
-    const formattedDate = `${day}-${month}-${year}`;
-
-    return formattedDate;
 }
 
 function getFormHistory() {
