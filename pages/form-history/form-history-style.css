@@ -10,11 +10,57 @@
 main {
     color: var(--dark-color);
 
-    max-width: 72%;
+    width: 72%;
 
     flex: 1;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.form-history-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-history-container h1 {
+    font-family: "Barlow Condensed";
+    font-size: 2.6rem;
+    text-align: center;
+}
+
+.form-entry {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: var(--lightest-blue);
+    color: var(--dark-color);
+    padding: 20px;
+    border-radius: 14px;
+}
+
+.form-entry div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-entry h1 {
+    font-family: "Barlow Condensed";
+    font-size: 2.6rem;
+    text-align: left;
+}
+
+.form-entry h2 {
+    font-family: "Montserrat";
+    font-size: 1.6rem;
+    font-style: italic;
+}
+
+.form-entry p {
+    font-family: "Montserrat";
+    font-size: 1.4rem;
+    line-height: 18px;
 }
