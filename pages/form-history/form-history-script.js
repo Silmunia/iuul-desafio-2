@@ -15,7 +15,7 @@ if (formHistoryJSON == null) {
 
     const formHistoryArray = JSON.parse(formHistoryJSON);
 
-    for (let i = formHistoryArray.length - 1; i >= 0; i--) {
+    for (let i = 0; i < formHistoryArray.length; i++) {
 
         const entryNameElement = document.createElement("h1");
         entryNameElement.textContent = formHistoryArray[i]["name"];
@@ -41,6 +41,21 @@ if (formHistoryJSON == null) {
         formDeletionIcon.src = "../../icons/Trash-Icon.svg";
         const formEntryDeletionTrigger = document.createElement("a");
         formEntryDeletionTrigger.href = "";
+        formEntryDeletionTrigger.addEventListener('click', (event) => {
+            const userChoice = confirm("Deseja apagar esta mensagem do formulário? Esta operação é irreversível.");
+
+            if (userChoice) {
+                const newFormHistoryArray = formHistoryArray.toSpliced(i, 1);
+
+                const newFormHistoryJSON = JSON.stringify(newFormHistoryArray);
+
+                localStorage.setItem(FORM_HISTORY_KEY, newFormHistoryJSON);
+
+                location.reload();
+            } else {
+                event.preventDefault();
+            }
+        });
         formEntryDeletionTrigger.appendChild(formDeletionIcon);
 
         formEntryDeletionTrigger.classList.add("entry-delete-trigger");
