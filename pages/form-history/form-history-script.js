@@ -24,7 +24,7 @@ if (formHistoryJSON == null) {
         entryEmailElement.textContent = formHistoryArray[i]["email"];
 
         const entryDateElement = document.createElement("h3");
-        entryDateElement.textContent = formHistoryArray[i]["date"];
+        entryDateElement.textContent = makeDateString(formHistoryArray[i]["date"]);
 
         const entryIdentificationContainer = document.createElement("div");
         entryIdentificationContainer.appendChild(entryNameElement);
@@ -42,4 +42,28 @@ if (formHistoryJSON == null) {
 
         historyContainer.appendChild(formEntryContainer);
     }
+}
+
+function makeDateString(entryEpochString) {
+    const entryDate = new Date(entryEpochString);
+
+    const day = entryDate.getUTCDate();
+    const month = getMonthNameFromDate(entryDate);
+    const year = entryDate.getUTCFullYear();
+
+    const hours = entryDate.getUTCHours();
+    const minutes = entryDate.getUTCMinutes();
+    const seconds = entryDate.getUTCSeconds();
+
+    return `${day} de ${month} de ${year}, ${hours}:${minutes}:${seconds} UTC`
+}
+
+function getMonthNameFromDate(inputDate) {
+    const monthName = inputDate.toLocaleString('pt', { month: 'long'});
+
+    const monthFirstLetter = monthName.charAt(0).toUpperCase();
+
+    const monthCapitalized = monthFirstLetter + monthName.slice(1);
+
+    return monthCapitalized;
 }
