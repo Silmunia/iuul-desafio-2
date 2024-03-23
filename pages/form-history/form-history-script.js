@@ -1,41 +1,53 @@
 
-const FORM_HISTORY_KEY = "formHistory";
+class EntryContainerFactory {
+    constructor(historyArray) {
+        this.historyArray = historyArray;
+    }
 
-const historyContainer = document.querySelector(".form-history-container");
+    getMonthNameFromDate(inputDate) {
+        const monthName = inputDate.toLocaleString('pt', { month: 'long'});
+    
+        const monthFirstLetter = monthName.charAt(0).toUpperCase();
+    
+        const monthCapitalized = monthFirstLetter + monthName.slice(1);
+    
+        return monthCapitalized;
+    }
 
-const formHistoryJSON = localStorage.getItem(FORM_HISTORY_KEY);
+    makeDateString(entryEpochString) {
+        const entryDate = new Date(entryEpochString);
+    
+        const day = entryDate.getUTCDate();
+        const month = this.getMonthNameFromDate(entryDate);
+        const year = entryDate.getUTCFullYear();
+    
+        const hours = entryDate.getUTCHours();
+        const minutes = entryDate.getUTCMinutes();
+        const seconds = entryDate.getUTCSeconds();
+    
+        return `${day} de ${month} de ${year}, ${hours}:${minutes}:${seconds} UTC`
+    }
 
-if (formHistoryJSON == null) {
-
-    const messageElement = document.createElement("h1");
-    messageElement.textContent = "No form history found.";
-
-    historyContainer.appendChild(messageElement);
-} else {
-
-    const formHistoryArray = JSON.parse(formHistoryJSON);
-
-    for (let i = 0; i < formHistoryArray.length; i++) {
-
+    makeElement(entryIndex) {
         const entryNameElement = document.createElement("h1");
-        entryNameElement.textContent = formHistoryArray[i]["name"];
+        entryNameElement.textContent = this.historyArray[entryIndex]["name"];
 
         const entryEmailElement = document.createElement("h2");
-        entryEmailElement.textContent = formHistoryArray[i]["email"];
+        entryEmailElement.textContent = this.historyArray[entryIndex]["email"];
 
         const entryIdentificationContainer = document.createElement("div");
         entryIdentificationContainer.appendChild(entryNameElement);
         entryIdentificationContainer.appendChild(entryEmailElement);
 
         const entryDateElement = document.createElement("h3");
-        entryDateElement.textContent = makeDateString(formHistoryArray[i]["date"]);
+        entryDateElement.textContent = this.makeDateString(this.historyArray[entryIndex]["date"]);
 
         const entryHeaderContainer = document.createElement("div");
         entryHeaderContainer.appendChild(entryIdentificationContainer);
         entryHeaderContainer.appendChild(entryDateElement);
 
         const entryMessageElement = document.createElement("p");
-        entryMessageElement.textContent = formHistoryArray[i]["message"];
+        entryMessageElement.textContent = this.historyArray[entryIndex]["message"];
 
         const formDeletionIcon = document.createElement("img");
         formDeletionIcon.src = "../../icons/Trash-Icon.svg";
@@ -45,7 +57,7 @@ if (formHistoryJSON == null) {
             const userChoice = confirm("Deseja apagar esta mensagem do formulário? Esta operação é irreversível.");
 
             if (userChoice) {
-                const newFormHistoryArray = formHistoryArray.toSpliced(i, 1);
+                const newFormHistoryArray = this.historyArray.toSpliced(entryIndex, 1);
 
                 const newFormHistoryJSON = JSON.stringify(newFormHistoryArray);
 
@@ -67,30 +79,31 @@ if (formHistoryJSON == null) {
 
         formEntryContainer.classList.add("form-entry");
 
-        historyContainer.appendChild(formEntryContainer);
+        return formEntryContainer;
     }
 }
 
-function makeDateString(entryEpochString) {
-    const entryDate = new Date(entryEpochString);
+const FORM_HISTORY_KEY = "formHistory";
 
-    const day = entryDate.getUTCDate();
-    const month = getMonthNameFromDate(entryDate);
-    const year = entryDate.getUTCFullYear();
+const historyContainer = document.querySelector(".form-history-container");
 
-    const hours = entryDate.getUTCHours();
-    const minutes = entryDate.getUTCMinutes();
-    const seconds = entryDate.getUTCSeconds();
+const formHistoryJSON = localStorage.getItem(FORM_HISTORY_KEY);
 
-    return `${day} de ${month} de ${year}, ${hours}:${minutes}:${seconds} UTC`
-}
+if (formHistoryJSON == null) {
 
-function getMonthNameFromDate(inputDate) {
-    const monthName = inputDate.toLocaleString('pt', { month: 'long'});
+    const messageElement = document.createElement("h1");
+    messageElement.textContent = "No form history found.";
 
-    const monthFirstLetter = monthName.charAt(0).toUpperCase();
+    historyContainer.appendChild(messageElement);
+} else {
 
-    const monthCapitalized = monthFirstLetter + monthName.slice(1);
+    const formHistoryArray = JSON.parse(formHistoryJSON);
+    const containerFactory = new EntryContainerFactory(formHistoryArray);
 
-    return monthCapitalized;
+    for (let i = 0; i < formHistoryArray.length; i++) {
+
+        const entryContainerElement = containerFactory.makeElement(i);
+
+        historyContainer.appendChild(entryContainerElement);
+    }
 }
