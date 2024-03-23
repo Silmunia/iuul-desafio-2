@@ -6,7 +6,7 @@ function makeNewFormSubmission() {
     const formEmailEntry = document.getElementById("email");
     const formMessage = document.querySelector("textarea");
 
-    const formEntryDate = new Date();
+    const formEntryDate = Date.now();
 
     const submissionObject = {
         "name": formNameEntry.value,
