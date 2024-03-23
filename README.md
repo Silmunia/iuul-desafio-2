@@ -5,7 +5,7 @@ Seguem abaixo links para artefatos produzidos no desenvolvimento deste projeto.
 [Link para Repositório](https://github.com/Silmunia/iuul-desafio-1)
 
 ## Trello utilizado
-[Link para Trello](https://trello.com/b/xwSVvDnG/iuul-desafio-2)
+[Link para Trello](https://trello.com/invite/b/xwSVvDnG/ATTI1c9636de2738c97aca261882b0567c17214B2923/iuul-desafio-2)
 
 ## Protótipo da Estrutura do Website
 [Link para Figma](https://www.figma.com/file/vfaTxloebRq8a4QCH7X4QI/iUUL-Desafio-%231---Prot%C3%B3tipo-Estrutura?type=design&mode=design)
