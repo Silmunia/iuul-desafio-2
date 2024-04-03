@@ -1,4 +1,6 @@
 
+const FORM_HISTORY_KEY = "formHistory";
+
 class EntryContainerFactory {
     #historyArray;
 
@@ -106,27 +108,29 @@ class EntryContainerFactory {
     }
 }
 
-const FORM_HISTORY_KEY = "formHistory";
+function prepareFormHistory() {
+    const historyContainer = document.querySelector(".form-history-container");
 
-const historyContainer = document.querySelector(".form-history-container");
+    const formHistoryJSON = localStorage.getItem(FORM_HISTORY_KEY);
 
-const formHistoryJSON = localStorage.getItem(FORM_HISTORY_KEY);
+    if (formHistoryJSON == null || formHistoryJSON == "[]") {
 
-if (formHistoryJSON == null || formHistoryJSON == "[]") {
+        const messageElement = document.createElement("h1");
+        messageElement.textContent = "No form history found.";
 
-    const messageElement = document.createElement("h1");
-    messageElement.textContent = "No form history found.";
+        historyContainer.appendChild(messageElement);
+    } else {
 
-    historyContainer.appendChild(messageElement);
-} else {
+        const formHistoryArray = JSON.parse(formHistoryJSON);
+        const containerFactory = new EntryContainerFactory(formHistoryArray);
 
-    const formHistoryArray = JSON.parse(formHistoryJSON);
-    const containerFactory = new EntryContainerFactory(formHistoryArray);
+        for (let i = 0; i < formHistoryArray.length; i++) {
 
-    for (let i = 0; i < formHistoryArray.length; i++) {
+            const entryContainerElement = containerFactory.makeElement(i);
 
-        const entryContainerElement = containerFactory.makeElement(i);
-
-        historyContainer.appendChild(entryContainerElement);
+            historyContainer.appendChild(entryContainerElement);
+        }
     }
 }
+
+prepareFormHistory();

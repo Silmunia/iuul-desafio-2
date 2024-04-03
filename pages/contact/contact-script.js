@@ -48,13 +48,17 @@ function deleteFormHistory(event) {
     }
 }
 
-const contactForm = document.querySelector("form");
+function prepareContactForm() {
+    const contactForm = document.querySelector("form");
 
-contactForm.addEventListener('submit', () => {
+    contactForm.addEventListener('submit', () => {
 
-    const newSubmission = makeNewFormSubmission();
+        const newSubmission = makeNewFormSubmission();
 
-    const formHistory = getFormHistory();
+        const formHistory = getFormHistory();
 
-    saveNewFormSubmission(newSubmission, formHistory);
-});
+        saveNewFormSubmission(newSubmission, formHistory);
+    });
+}
+
+prepareContactForm();
